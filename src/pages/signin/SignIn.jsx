@@ -2,7 +2,8 @@ import React from 'react';
 import * as S from './styles';
 
 import { LayoutSign } from '../../shared/layout';
-import { TextField , ButtonSubmit} from '../../shared/components';
+import { TextField, ButtonSubmit } from '../../shared/components';
+import { NavLink } from 'react-router-dom';
 
 export const SignIn = () => {
   return (
@@ -30,6 +31,9 @@ export const SignIn = () => {
         <ButtonSubmit>Entrar</ButtonSubmit>
       </S.Form>
       {/* link */}
+      <S.Span>
+        Não possui uma conta? <NavLink>CADASTRE-SE</NavLink>
+      </S.Span>
     </LayoutSign>
   );
 };
