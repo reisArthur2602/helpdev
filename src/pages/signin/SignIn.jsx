@@ -2,7 +2,7 @@ import React from 'react';
 import * as S from './styles';
 
 import { LayoutSign } from '../../shared/layout';
-import { TextField } from '../../shared/components';
+import { TextField , ButtonSubmit} from '../../shared/components';
 
 export const SignIn = () => {
   return (
@@ -14,9 +14,21 @@ export const SignIn = () => {
       </div>
 
       {/* form */}
-      <form>
-        <TextField label="Email" placeholder="email@email.com" type="text" name="email" />
-      </form>
+      <S.Form>
+        <TextField
+          label="Email"
+          placeholder="email@email.com"
+          type="text"
+          name="email"
+        />
+        <TextField
+          label="Senha"
+          placeholder="******"
+          type="password"
+          name="password"
+        />
+        <ButtonSubmit>Entrar</ButtonSubmit>
+      </S.Form>
       {/* link */}
     </LayoutSign>
   );

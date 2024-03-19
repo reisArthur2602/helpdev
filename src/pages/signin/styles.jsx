@@ -5,3 +5,9 @@ export const H1 = styled.h1`
   font-weight: var(--black);
   text-transform: uppercase;
 `;
+export const Form = styled.form`
+display: flex;
+flex-direction: column;
+gap: 1rem;
+
+`
