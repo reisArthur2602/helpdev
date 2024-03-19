@@ -10,6 +10,7 @@ export const Container = styled.div`
 
 export const Main = styled.main`
   max-width: 31.125rem;
+  width: 100%;
   padding: 4.25rem;
   display: flex;
   flex-direction: column;
