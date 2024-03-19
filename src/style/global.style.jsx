@@ -30,8 +30,8 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body{
-  min-height: 100vh;
   font-family: "Montserrat", sans-serif;
+  color: var(--dark);
 }
 
 button{

@@ -1,7 +1,10 @@
-import React from 'react'
+import React from 'react';
+import { LayoutSign } from '../../shared/layout';
 
 export const SignIn = () => {
   return (
-    <div>SignIn</div>
-  )
-}
+    <LayoutSign>
+      SignIn
+    </LayoutSign>
+  );
+};
