@@ -34,12 +34,12 @@ export const SignOut = () => {
           type="text"
           name="username"
         />
-        <ButtonSubmit>Entrar</ButtonSubmit>
+        <ButtonSubmit>Cadastrar</ButtonSubmit>
       </S.Form>
       {/* link */}
       <S.Span>
         Já possui uma conta? <NavLink to="/">FAÇA LOGIN</NavLink>
       </S.Span>
     </LayoutSign>
-  );
+  ); 
 };
