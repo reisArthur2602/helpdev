@@ -4,8 +4,10 @@ import * as S from './styles';
 import { LayoutSign } from '../../shared/layout';
 import { TextField, ButtonSubmit } from '../../shared/components';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../shared/context/Auth';
 
 export const SignIn = () => {
+ 
   return (
     <LayoutSign>
       {/* title */}
@@ -15,7 +17,7 @@ export const SignIn = () => {
       </div>
 
       {/* form */}
-      <S.Form>
+      <S.Form >
         <TextField
           label="Email"
           placeholder="email@email.com"
