@@ -29,7 +29,7 @@ export const SignOut = () => {
           name="password"
         />
         <TextField
-          label="Nome de Usuário"
+          label="Usuário"
           placeholder="Insira um nome de usuário"
           type="text"
           name="username"
@@ -38,7 +38,7 @@ export const SignOut = () => {
       </S.Form>
       {/* link */}
       <S.Span>
-        Já possui uma conta? <NavLink>FAÇA LOGIN</NavLink>
+        Já possui uma conta? <NavLink to="/">FAÇA LOGIN</NavLink>
       </S.Span>
     </LayoutSign>
   );

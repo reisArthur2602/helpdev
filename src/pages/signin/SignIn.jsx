@@ -32,7 +32,7 @@ export const SignIn = () => {
       </S.Form>
       {/* link */}
       <S.Span>
-        Não possui uma conta? <NavLink>CADASTRE-SE</NavLink>
+        Não possui uma conta? <NavLink to="/register">CADASTRE-SE</NavLink>
       </S.Span>
     </LayoutSign>
   );

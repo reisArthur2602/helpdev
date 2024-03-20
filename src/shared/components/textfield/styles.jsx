@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
   width: 100%;
   font-size: 0.875rem;
   font-weight: var(--semibold);
