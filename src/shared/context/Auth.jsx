@@ -1,8 +1,11 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { useState } from 'react';
 import { createContext } from 'react';
 import { auth, db } from '../services/firebase/conn';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export const AuthContext = createContext({});
 
@@ -30,8 +33,22 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
+  const HandleLogin = async (email, password) => {
+    await signInWithEmailAndPassword(auth, email, password)
+      .then(async (res) => {
+        const uid = res.user.uid;
+        const query = doc(db, 'users', uid);
+        const getUser = await getDoc(query)
+        setUser(getUser.data());
+        localStorage.setItem('@user', JSON.stringify(getUser.data()));
+        console.log('Seja bem vindo');
+      })
+      .catch((err) => console.error('Email ou senha incorretos', err));
+  };
   return (
-    <AuthContext.Provider value={{ signed: !!user, HandleRegister }}>
+    <AuthContext.Provider
+      value={{ signed: !!user, HandleRegister, HandleLogin }}
+    >
       {children}
     </AuthContext.Provider>
   );
