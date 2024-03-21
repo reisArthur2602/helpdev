@@ -30,7 +30,7 @@ export const New = () => {
 
   return (
     <LayoutDashBoard>
-      <Header title="Chamado" />
+      <Header title="Chamados" />
       <S.Form onSubmit={handleSubmit(HandleCreate)}>
         <S.Title>Criar Chamado</S.Title>
         <S.Box>
