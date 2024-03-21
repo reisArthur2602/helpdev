@@ -30,3 +30,10 @@ export const clientSchema = yup.object().shape({
     .test('len', 'São necessários 11 dígitos', (val) => val.length === 11)
     .required('O telefone é obrigatório'),
 });
+
+export const orderSchema = yup.object().shape({
+  client: yup.string().required('Cliente é obrigatório'),
+  status: yup.string().required('Status é obrigatório'),
+  subject: yup.string().required('Assunto é obrigatorio'),
+  complement: yup.string(),
+});
