@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { LayoutDashBoard } from '../../shared/layout';
 import { ButtonSubmit, Header } from '../../shared/components';
@@ -10,10 +10,20 @@ import {
 } from 'react-icons/hi';
 
 import * as S from './styles';
+import { UserServices } from '../../shared/services';
 
 export const Order = () => {
+  const [getOrder, setGetOrder] = useState([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchOrders = async () => {
+      await UserServices.getOrders(setGetOrder);
+    };
+    fetchOrders();
+  }, []);
+
+  console.log(getOrder);
   return (
     <LayoutDashBoard>
       <Header title="chamados" />
@@ -42,23 +52,25 @@ export const Order = () => {
           </S.THead>
           {/* row */}
           <tbody>
-            <S.Row>
-              <S.RowContent>0001</S.RowContent>
-              <S.RowContent>Cliente</S.RowContent>
-              <S.RowContent>Assunto</S.RowContent>
-              <S.RowContent>21/3/2024</S.RowContent>
-              <S.RowContent>Finalizado</S.RowContent>
-              <S.RowContent>
-                <div>
-                  <button>
-                    <HiOutlineSearch size={20} color="#010001" />
-                  </button>
-                  <button>
-                    <HiOutlinePencilAlt size={20} color="#010001" />
-                  </button>
-                </div>
-              </S.RowContent>
-            </S.Row>
+            {getOrder.map((data) => (
+              <S.Row>
+                <S.RowContent>{data.id}</S.RowContent>
+                <S.RowContent>{data.client}</S.RowContent>
+                <S.RowContent>{data.subject}</S.RowContent>
+                <S.RowContent>{data.date}</S.RowContent>
+                <S.RowContent>{data.status}</S.RowContent>
+                <S.RowContent>
+                  <div>
+                    <button>
+                      <HiOutlineSearch size={20} color="#010001" />
+                    </button>
+                    <button>
+                      <HiOutlinePencilAlt size={20} color="#010001" />
+                    </button>
+                  </div>
+                </S.RowContent>
+              </S.Row>
+            ))}
           </tbody>
         </S.Table>
       </S.Section>

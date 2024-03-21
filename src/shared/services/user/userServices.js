@@ -1,5 +1,6 @@
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/conn';
+import { getDateNow } from '../utils/utils';
 
 export const UserServices = {
   createClient: async (data) => {
@@ -26,5 +27,23 @@ export const UserServices = {
     await addDoc(collection(db, 'orders'), data)
       .then(() => console.log('Chamado cadastrado com sucesso'))
       .catch((err) => console.error(err));
+  },
+  getOrders: async (setState) => {
+    const orderRef = collection(db, 'orders');
+    await getDocs(orderRef).then((data) => {
+      let orders = [];
+
+      data.forEach((doc) => {
+        orders.push({
+          id: doc.id,
+          client: doc.data().client,
+          subject: doc.data().subject,
+          date: getDateNow(),
+          status: doc.data().status,
+          complement: doc.data().complement,
+        });
+      });
+      setState(orders);
+    });
   },
 };
