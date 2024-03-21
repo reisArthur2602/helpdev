@@ -18,12 +18,12 @@ export const Sidebar = () => {
         {/* navlinks */}
         <S.List>
           <li>
-            <NavItem path="/orders">
+            <NavItem path="/order">
               <HiOutlineCursorClick size={20} /> Chamados
             </NavItem>
           </li>
           <li>
-            <NavItem path="/clients">
+            <NavItem path="/client">
               <HiOutlineUser size={20} />
               Clientes
             </NavItem>
