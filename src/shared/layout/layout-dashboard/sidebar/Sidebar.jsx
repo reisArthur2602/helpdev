@@ -23,7 +23,7 @@ export const Sidebar = () => {
             </NavItem>
           </li>
           <li>
-            <NavItem path="/client">
+            <NavItem path="/clients">
               <HiOutlineUser size={20} />
               Clientes
             </NavItem>

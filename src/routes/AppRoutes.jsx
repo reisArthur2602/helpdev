@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Order, SignIn, SignOut } from '../pages';
+import { Clients, New, Order, Profile, SignIn, SignOut } from '../pages';
 import { Private } from './Private';
 
 export const AppRoutes = () => {
@@ -11,6 +11,9 @@ export const AppRoutes = () => {
 
     
         <Route path="/order" element={<Private><Order/></Private>} />
+        <Route path="/order/new" element={<Private><New/></Private>} />
+        <Route path="/clients" element={<Private><Clients/></Private>} />
+        <Route path="/profile" element={<Private><Profile/></Private>} />
      
 
       <Route path="*" element={<SignIn />} />
