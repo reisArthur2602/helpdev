@@ -23,8 +23,6 @@ export const SignOut = () => {
         HandleRegister(email, password, username)
       )
       .catch((res) => res.inner.forEach((err) => console.log(err.message)));
-
-  
   };
 
   return (
@@ -61,7 +59,7 @@ export const SignOut = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <ButtonSubmit>Cadastrar</ButtonSubmit>
+        <ButtonSubmit type="submit">Cadastrar</ButtonSubmit>
       </S.Form>
       {/* link */}
       <S.Span>

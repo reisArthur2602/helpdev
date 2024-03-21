@@ -49,7 +49,7 @@ export const SignIn = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <ButtonSubmit>Entrar</ButtonSubmit>
+        <ButtonSubmit type="submit">Entrar</ButtonSubmit>
       </S.Form>
       {/* link */}
       <S.Span>
