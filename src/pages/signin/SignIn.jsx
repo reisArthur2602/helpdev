@@ -5,6 +5,7 @@ import { LayoutSign } from '../../shared/layout';
 import { TextField, ButtonSubmit } from '../../shared/components';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../shared/context/Auth';
+import { loginSchema } from '../../shared/services';
 
 export const SignIn = () => {
   const [email, setEmail] = useState();
@@ -16,7 +17,10 @@ export const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await HandleLogin(email, password);
+    loginSchema
+      .validate({ email, password }, { abortEarly: false })
+      .then(({ email, password }) => HandleLogin(email, password))
+      .catch((res) => res.inner.forEach((err) => console.log(err.message)));
   };
 
   return (

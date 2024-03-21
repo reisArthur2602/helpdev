@@ -5,6 +5,7 @@ import { LayoutSign } from '../../shared/layout';
 import { TextField, ButtonSubmit } from '../../shared/components';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../shared/context/Auth';
+import { registerSchema } from '../../shared/services';
 
 export const SignOut = () => {
   const [email, setEmail] = useState();
@@ -16,9 +17,14 @@ export const SignOut = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await HandleRegister(email, password, username)
-     
-   
+    registerSchema
+      .validate({ email, password, username }, { abortEarly: false })
+      .then(({ email, password, username }) =>
+        HandleRegister(email, password, username)
+      )
+      .catch((res) => res.inner.forEach((err) => console.log(err.message)));
+
+  
   };
 
   return (
