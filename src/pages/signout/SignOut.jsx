@@ -8,9 +8,9 @@ import { AuthContext } from '../../shared/context/Auth';
 import { registerSchema } from '../../shared/services';
 
 export const SignOut = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [username, setUsername] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   // const navigate = useNavigate();
 
   const { HandleRegister } = useContext(AuthContext);
