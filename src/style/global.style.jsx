@@ -27,15 +27,20 @@ export const GlobalStyle = createGlobalStyle`
   outline: none;
   text-decoration: none;
   font-family: inherit;
+  list-style: none;
 }
+
+
 
 body{
   font-family: "Montserrat", sans-serif;
   color: var(--dark);
+  background-color: var(--light-grey-100);
 }
 
 button{
   cursor: pointer;
+  background-color: transparent;
 }
 
 `;
