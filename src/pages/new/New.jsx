@@ -8,15 +8,20 @@ import { ButtonSubmit, Header } from '../../shared/components';
 import { SelectField } from './select-field/SelectField';
 import { TextareaField } from './textarea-field/TextareaField';
 import * as S from './styles';
+import { useParams } from 'react-router-dom';
 
 export const New = () => {
   const [getClients, setGetClients] = useState([]);
+  const [idCustomer, setIdCustomer] = useState({});
+  const { id } = useParams();
 
   useEffect(() => {
-    const fetchClients = async () => {
+    return async () => {
       await UserServices.getClients(setGetClients);
+      if (id) {
+        await UserServices.getClientsByID(id, setIdCustomer);
+      }
     };
-    fetchClients();
   }, []);
   const {
     handleSubmit,
@@ -28,27 +33,31 @@ export const New = () => {
     await UserServices.createOrder(data);
   };
 
+  const HandleUpdate = async (data) => {
+    await UserServices.updateOrders(id, data);
+  };
+
   return (
     <LayoutDashBoard>
       <Header title="Chamados" />
-      <S.Form onSubmit={handleSubmit(HandleCreate)}>
-        <S.Title>Criar Chamado</S.Title>
+      <S.Form onSubmit={handleSubmit(id ? HandleUpdate : HandleCreate)}>
+        <S.Title>{id ? 'Editar Chamado' : 'Criar Chamado'} </S.Title>
         <S.Box>
-          <SelectField label="Cliente*" name="client" {...register('client')}>
+          <SelectField label="Cliente" name="client" {...register('client')}>
             <option value="">Escolha uma das opções</option>
             {getClients.map((client) => (
               <option key={client.id}>{client.name}</option>
             ))}
           </SelectField>
 
-          <SelectField label="Status*" name="status" {...register('status')}>
+          <SelectField label="Status" name="status" {...register('status')}>
             <option value="">Escolha uma das opções</option>
             <option value="Em Progresso">Em Progresso</option>
             <option value="Em Aberto">Em Aberto</option>
             <option value="Finalizado">Finalizado</option>
           </SelectField>
 
-          <SelectField label="Assunto*" name="subject" {...register('subject')}>
+          <SelectField label="Assunto" name="subject" {...register('subject')}>
             <option value="">Escolha uma das opções</option>
             <option value="Suporte">Suporte</option>
             <option value="Financeiro">Financeiro</option>
@@ -61,7 +70,7 @@ export const New = () => {
             name="complement"
             {...register('complement')}
           />
-          <ButtonSubmit type="submit">Criar</ButtonSubmit>
+          <ButtonSubmit type="submit">{id ? 'Editar' : 'Criar'}</ButtonSubmit>
         </S.Box>
       </S.Form>
     </LayoutDashBoard>

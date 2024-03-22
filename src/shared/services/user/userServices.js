@@ -1,4 +1,12 @@
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+} from 'firebase/firestore';
 import { db } from '../firebase/conn';
 import { getDateNow } from '../utils/utils';
 
@@ -23,6 +31,11 @@ export const UserServices = {
       setState(clients);
     });
   },
+  getClientsByID: async (id, setState) => {
+    const clientRef = doc(db, 'orders', id);
+    await getDoc(clientRef).then((data) => setState(data.data()));
+  },
+
   createOrder: async (data) => {
     await addDoc(collection(db, 'orders'), data)
       .then(() => console.log('Chamado cadastrado com sucesso'))
@@ -45,5 +58,15 @@ export const UserServices = {
       });
       setState(orders);
     });
+  },
+  updateOrders: async (id, data) => {
+    const orderRef = doc(db, 'orders', id);
+    await updateDoc(orderRef, data).then(() =>
+      console.log('atualizado com sucesso')
+    );
+  },
+  deleteOrders: async (id) => {
+    const orderRef = doc(db, 'orders', id);
+    await deleteDoc(orderRef)
   },
 };

@@ -8,8 +8,8 @@ import { AuthContext } from '../../shared/context/Auth';
 import { loginSchema } from '../../shared/services';
 
 export const SignIn = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   // const navigate = useNavigate();
 

@@ -7,6 +7,7 @@ import {
   HiOutlinePlusCircle,
   HiOutlinePencilAlt,
   HiOutlineSearch,
+  HiOutlineTrash,
 } from 'react-icons/hi';
 
 import * as S from './styles';
@@ -16,18 +17,22 @@ export const Order = () => {
   const [getOrder, setGetOrder] = useState([]);
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState({});
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchOrders = async () => {
+    return async () => {
       await UserServices.getOrders(setGetOrder);
     };
-    fetchOrders();
   }, []);
 
   const handleModal = (data) => {
     setOpen(!open);
     setInfo(data);
+  };
+  const handleDelete = async (id) => {
+    await UserServices.deleteOrders(id);
+    await UserServices.getOrders(setGetOrder);
   };
 
   return (
@@ -73,8 +78,13 @@ export const Order = () => {
                       <button onClick={() => handleModal(data)}>
                         <HiOutlineSearch size={20} color="#010001" />
                       </button>
-                      <button>
+                      <button
+                        onClick={() => navigate(`/order/edit/${data.id}`)}
+                      >
                         <HiOutlinePencilAlt size={20} color="#010001" />
+                      </button>
+                      <button onClick={() => handleDelete(data.id)}>
+                        <HiOutlineTrash size={20} color="#010001" />
                       </button>
                     </div>
                   </S.RowContent>

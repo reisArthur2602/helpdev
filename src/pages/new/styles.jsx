@@ -12,8 +12,8 @@ export const Form = styled.form`
 
 export const Box = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
+ display: flex;
+ flex-direction: column;
   gap: 1.25rem;
 `;
 

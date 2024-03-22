@@ -12,6 +12,7 @@ export const AppRoutes = () => {
     
         <Route path="/order" element={<Private><Order/></Private>} />
         <Route path="/order/new" element={<Private><New/></Private>} />
+        <Route path="/order/edit/:id" element={<Private><New/></Private>} />
         <Route path="/clients" element={<Private><Clients/></Private>} />
         <Route path="/profile" element={<Private><Profile/></Private>} />
      
