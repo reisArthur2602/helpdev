@@ -26,7 +26,6 @@ export const New = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors },
   } = useForm({ resolver: yupResolver(orderSchema) });
 
   const HandleCreate = async (data) => {
