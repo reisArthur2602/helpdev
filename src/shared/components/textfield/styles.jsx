@@ -15,4 +15,8 @@ export const Input = styled.input`
   &::placeholder {
     color: var(--purple);
   }
+
+  &:disabled{
+    cursor: not-allowed;
+  }
 `;
