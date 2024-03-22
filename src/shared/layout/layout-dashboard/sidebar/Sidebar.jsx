@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Logo from '../../../../assets/logo.svg';
 import * as S from './styles';
 import { NavItem } from './navitem/NavItem';
@@ -8,8 +8,11 @@ import {
   HiAdjustments,
   HiOutlineLogout,
 } from 'react-icons/hi';
+import { AuthContext } from '../../../context/Auth';
 
 export const Sidebar = () => {
+  const { Logout } = useContext(AuthContext);
+
   return (
     <S.Sidebar>
       <S.Navbar>
@@ -38,7 +41,7 @@ export const Sidebar = () => {
       </S.Navbar>
 
       {/* logout */}
-      <S.ButtonLogout>
+      <S.ButtonLogout onClick={Logout}>
         <HiOutlineLogout size={20} />
         Sair
       </S.ButtonLogout>

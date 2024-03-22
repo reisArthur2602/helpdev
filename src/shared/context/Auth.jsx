@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { createContext } from 'react';
@@ -69,9 +70,24 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const Logout = () => {
+    signOut(auth);
+    setUser(null);
+    localStorage.clear();
+    setLoading(false);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, HandleRegister, HandleLogin, loading , user , setUser}}
+      value={{
+        HandleRegister,
+        HandleLogin,
+        Logout,
+        setUser,
+        loading,
+        user,
+        signed: !!user,
+      }}
     >
       {children}
     </AuthContext.Provider>
