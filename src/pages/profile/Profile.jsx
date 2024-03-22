@@ -5,27 +5,50 @@ import { AuthContext } from '../../shared/context/Auth';
 import { HiCloudUpload } from 'react-icons/hi';
 import UserIcon from '../../assets/user-icon.png';
 import * as S from './styles';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../../shared/services';
 
 export const Profile = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [email, setEmail] = useState(user && user.email);
   const [avatarImage, setAvatarImage] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(user & user.avatarUrl);
   const [username, setUsername] = useState('');
 
+  const handleFile = (e) => {
+    const image = e.target.files[0];
+    if (image.type === 'image/png' || image.type === 'image/jpeg') {
+      setAvatarImage(image);
+      setAvatarUrl(URL.createObjectURL(image));
+    } else {
+      console.log('Envie arquivos no formato PNG ou JPEG');
+      setAvatarUrl(null);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (avatarImage === null && username !== '') {
+      const docRef = doc(db, 'users', user.uid);
+      await updateDoc(docRef, { ...user, username: username }).then(() => {
+        const data = { ...user, username: username };
+        setUser(data);
+        localStorage.setItem('@user', JSON.stringify(data));
+      });
+    }
+  };
+  console.log(user);
   return (
     <LayoutDashBoard>
       <Header title="perfil" />
-      <S.Form>
+      <S.Form onSubmit={handleSubmit}>
         <S.Title>Atualizar Perfil</S.Title>
         {/* avatar */}
         <S.Avatar>
-          <input type="file" accept="image/*" />
+          <input type="file" accept="image/*" onChange={handleFile} />
           <HiCloudUpload size={60} color="#bbbbb" />
-          <img
-            src={avatarImage ? avatarImage : UserIcon}
-            alt="imagem de perfil"
-          />
+          <img src={avatarUrl ? avatarUrl : UserIcon} alt="imagem de perfil" />
         </S.Avatar>
 
         <S.Box>
@@ -44,7 +67,7 @@ export const Profile = () => {
               type="text"
               name="email"
               value={email}
-              disabled="true"
+              disabled={true}
             />
           </div>
           <ButtonSubmit type="submit">Salvar</ButtonSubmit>
