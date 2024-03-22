@@ -6,14 +6,15 @@ import { HiCloudUpload } from 'react-icons/hi';
 import UserIcon from '../../assets/user-icon.png';
 import * as S from './styles';
 import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '../../shared/services';
+import { db, storage } from '../../shared/services';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 export const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
   const [email, setEmail] = useState(user && user.email);
   const [avatarImage, setAvatarImage] = useState(null);
-  const [avatarUrl, setAvatarUrl] = useState(user & user.avatarUrl);
-  const [username, setUsername] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState(user && user.avatarUrl);
+  const [username, setUsername] = useState(user && user.username);
 
   const handleFile = (e) => {
     const image = e.target.files[0];
@@ -23,7 +24,27 @@ export const Profile = () => {
     } else {
       console.log('Envie arquivos no formato PNG ou JPEG');
       setAvatarUrl(null);
+      return;
     }
+  };
+
+  const handleUpload = async () => {
+    const uploadRef = ref(storage, `images/${user.uid}/${avatarImage.name}`);
+
+    uploadBytes(uploadRef, avatarImage).then((res) => {
+      getDownloadURL(res.ref).then(async (url) => {
+        const docRef = doc(db, 'users', user.uid);
+        await updateDoc(docRef, {
+          ...user,
+          username: username,
+          avatarUrl: url,
+        }).then(() => {
+          const data = { ...user, username: username, avatarUrl: url };
+          setUser(data);
+          localStorage.setItem('@user', JSON.stringify(data));
+        });
+      });
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -36,9 +57,11 @@ export const Profile = () => {
         setUser(data);
         localStorage.setItem('@user', JSON.stringify(data));
       });
+    } else if (avatarImage !== null ) {
+      handleUpload();
     }
   };
-  console.log(user);
+
   return (
     <LayoutDashBoard>
       <Header title="perfil" />
@@ -47,7 +70,7 @@ export const Profile = () => {
         {/* avatar */}
         <S.Avatar>
           <input type="file" accept="image/*" onChange={handleFile} />
-          <HiCloudUpload size={60} color="#bbbbb" />
+          <HiCloudUpload size={60} color="#bababa" />
           <img src={avatarUrl ? avatarUrl : UserIcon} alt="imagem de perfil" />
         </S.Avatar>
 
