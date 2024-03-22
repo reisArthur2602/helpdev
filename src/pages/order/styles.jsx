@@ -16,7 +16,6 @@ export const THead = styled.thead`
   background-color: var(--dark);
   color: var(--white);
   font-weight: var(--regular);
-
 `;
 export const HeaderContent = styled.th`
   max-width: 11.125rem;
@@ -43,4 +42,13 @@ export const RowContent = styled.td`
     align-items: center;
     gap: 0.625rem;
   }
+`;
+
+export const EmptyText = styled.span`
+  width: 100%;
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 1.25rem;
+  font-weight: var(--semibold);
+  color: var(--light-grey-200);
 `;

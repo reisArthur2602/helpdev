@@ -50,48 +50,50 @@ export const Order = () => {
             <HiOutlinePlusCircle size={20} />
             Novo Chamado
           </ButtonSubmit>
-
-          {/* table */}
-          <S.Table>
-            {/* header */}
-            <S.THead>
-              <tr>
-                <S.HeaderContent scope="col">Id</S.HeaderContent>
-                <S.HeaderContent scope="col">Cliente</S.HeaderContent>
-                <S.HeaderContent scope="col">Assunto</S.HeaderContent>
-                <S.HeaderContent scope="col">Data</S.HeaderContent>
-                <S.HeaderContent scope="col">Status</S.HeaderContent>
-                <S.HeaderContent scope="col">#</S.HeaderContent>
-              </tr>
-            </S.THead>
-            {/* row */}
-            <tbody>
-              {getOrder.map((data) => (
-                <S.Row key={data.id}>
-                  <S.RowContent>{data.id}</S.RowContent>
-                  <S.RowContent>{data.client}</S.RowContent>
-                  <S.RowContent>{data.subject}</S.RowContent>
-                  <S.RowContent>{data.date}</S.RowContent>
-                  <S.RowContent>{data.status}</S.RowContent>
-                  <S.RowContent>
-                    <div>
-                      <button onClick={() => handleModal(data)}>
-                        <HiOutlineSearch size={20} color="#010001" />
-                      </button>
-                      <button
-                        onClick={() => navigate(`/order/edit/${data.id}`)}
-                      >
-                        <HiOutlinePencilAlt size={20} color="#010001" />
-                      </button>
-                      <button onClick={() => handleDelete(data.id)}>
-                        <HiOutlineTrash size={20} color="#010001" />
-                      </button>
-                    </div>
-                  </S.RowContent>
-                </S.Row>
-              ))}
-            </tbody>
-          </S.Table>
+          {getOrder.length > 0 ? (
+            <S.Table>
+              {/* header */}
+              <S.THead>
+                <tr>
+                  <S.HeaderContent scope="col">Id</S.HeaderContent>
+                  <S.HeaderContent scope="col">Cliente</S.HeaderContent>
+                  <S.HeaderContent scope="col">Assunto</S.HeaderContent>
+                  <S.HeaderContent scope="col">Data</S.HeaderContent>
+                  <S.HeaderContent scope="col">Status</S.HeaderContent>
+                  <S.HeaderContent scope="col">#</S.HeaderContent>
+                </tr>
+              </S.THead>
+              {/* row */}
+              <tbody>
+                {getOrder.map((data) => (
+                  <S.Row key={data.id}>
+                    <S.RowContent>{data.id}</S.RowContent>
+                    <S.RowContent>{data.client}</S.RowContent>
+                    <S.RowContent>{data.subject}</S.RowContent>
+                    <S.RowContent>{data.date}</S.RowContent>
+                    <S.RowContent>{data.status}</S.RowContent>
+                    <S.RowContent>
+                      <div>
+                        <button onClick={() => handleModal(data)}>
+                          <HiOutlineSearch size={20} color="#010001" />
+                        </button>
+                        <button
+                          onClick={() => navigate(`/order/edit/${data.id}`)}
+                        >
+                          <HiOutlinePencilAlt size={20} color="#010001" />
+                        </button>
+                        <button onClick={() => handleDelete(data.id)}>
+                          <HiOutlineTrash size={20} color="#010001" />
+                        </button>
+                      </div>
+                    </S.RowContent>
+                  </S.Row>
+                ))}
+              </tbody>
+            </S.Table>
+          ) : (
+            <S.EmptyText>Nenhum chamado foi encontrado</S.EmptyText>
+          )}
         </S.Section>
       </LayoutDashBoard>
     </>
