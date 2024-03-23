@@ -12,9 +12,9 @@ import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../shared/context/Auth';
 
 export const New = () => {
+  const { user } = useContext(AuthContext);
   const [getClients, setGetClients] = useState([]);
   const [idCustomer, setIdCustomer] = useState({});
-  const { user } = useContext(AuthContext);
   const { id } = useParams();
 
   useEffect(() => {
@@ -29,7 +29,8 @@ export const New = () => {
     resolver: yupResolver(orderSchema),
   });
 
-  const HandleCreate = async (data) => {
+  const HandleCreate = async (res) => {
+    const data = { ...res, uid: user.uid };
     await UserServices.createOrder(data);
   };
 

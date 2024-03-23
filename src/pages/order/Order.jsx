@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { LayoutDashBoard } from '../../shared/layout';
 import { ButtonSubmit, Header, Modal } from '../../shared/components';
@@ -12,8 +12,10 @@ import {
 
 import * as S from './styles';
 import { UserServices } from '../../shared/services';
+import { AuthContext } from '../../shared/context/Auth';
 
 export const Order = () => {
+  const { user } = useContext(AuthContext);
   const [getOrder, setGetOrder] = useState([]);
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState({});
@@ -22,7 +24,9 @@ export const Order = () => {
 
   useEffect(() => {
     return async () => {
-      await UserServices.getOrders(setGetOrder).catch((err)=>console.error("falha ao buscar Chamados"))
+      await UserServices.getOrdersByUser(setGetOrder, user.uid).catch((err) =>
+        console.error('falha ao buscar Chamados')
+      );
     };
   }, []);
 
@@ -34,7 +38,7 @@ export const Order = () => {
     await UserServices.deleteOrders(id);
     await UserServices.getOrders(setGetOrder);
   };
- 
+
   return (
     <>
       <Modal isOpen={open} infos={info} onClick={() => setOpen(!open)} />

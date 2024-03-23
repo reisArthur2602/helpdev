@@ -34,7 +34,7 @@ export const UserServices = {
           name: doc.data().name,
         });
       });
-      
+
       setState(clients);
     });
   },
@@ -49,9 +49,12 @@ export const UserServices = {
       .then(() => console.log('Chamado cadastrado com sucesso'))
       .catch((err) => console.error(err));
   },
-  getOrders: async (setState) => {
+  getOrdersByUser: async (setState, uid) => {
     const orderRef = collection(db, 'orders');
-    await getDocs(orderRef).then((data) => {
+
+    const q = query(orderRef, where('uid', '==', uid));
+
+    onSnapshot(q, (data) => {
       let orders = [];
 
       data.forEach((doc) => {
@@ -64,6 +67,7 @@ export const UserServices = {
           complement: doc.data().complement,
         });
       });
+
       setState(orders);
     });
   },
@@ -78,28 +82,3 @@ export const UserServices = {
     await deleteDoc(orderRef);
   },
 };
-
-// if (data) {
-//   const taskRef = collection(db, "tarefas");
-//   const q = query(
-//     taskRef,
-//     orderBy("created", "desc"),
-//     where("userUid", "==", data?.uid)
-//   );
-
-//   const unsub = onSnapshot(q, (snapshot) => {
-//     let list = [];
-
-//     snapshot.forEach((doc) => {
-//       list.push({
-//         id: doc.id,
-//         tarefa: doc.data().tarefa,
-//         userUid: doc.data().userUid,
-//         completa: doc.data().completa,
-//         created: doc.data().created,
-//       });
-//     });
-
-//     setTasks(list);
-//   });
-// }
