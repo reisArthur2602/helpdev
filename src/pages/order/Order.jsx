@@ -46,7 +46,7 @@ export const Order = () => {
       <LayoutDashBoard>
         <Header title="chamados" />
         <S.Section>
-          <ButtonSubmit
+          <ButtonSubmit type="button"
             onClick={() => {
               navigate('/order/new');
             }}
