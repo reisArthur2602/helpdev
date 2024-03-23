@@ -23,10 +23,9 @@ export const New = () => {
       }
     };
   }, []);
-  const {
-    handleSubmit,
-    register,
-  } = useForm({ resolver: yupResolver(orderSchema) });
+  const { handleSubmit, register } = useForm({
+    resolver: yupResolver(orderSchema),
+  });
 
   const HandleCreate = async (data) => {
     await UserServices.createOrder(data);
@@ -44,6 +43,7 @@ export const New = () => {
         <S.Box>
           <SelectField label="Cliente" name="client" {...register('client')}>
             <option value="">Escolha uma das opções</option>
+            <option>Cliente</option>
             {getClients.map((client) => (
               <option key={client.id}>{client.name}</option>
             ))}

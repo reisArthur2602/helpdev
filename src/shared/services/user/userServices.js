@@ -7,6 +7,7 @@ import {
   getDocs,
   updateDoc,
 } from 'firebase/firestore';
+
 import { db } from '../firebase/conn';
 import { getDateNow } from '../utils/utils';
 
@@ -18,18 +19,19 @@ export const UserServices = {
   },
   getClients: async (setState) => {
     const clientRef = collection(db, 'clients');
-    await getDocs(clientRef).then((data) => {
-      let clients = [];
-
-      data.forEach((doc) =>
-        clients.push({
-          id: doc.id,
-          name: doc.data().name,
-        })
-      );
-
-      setState(clients);
-    });
+    await getDocs(clientRef)
+      .then((data) => {
+        let clients = [];
+        
+        data.forEach((doc) =>
+          clients.push({
+            id: doc.id,
+            name: doc.data().name,
+          })
+        );
+        setState(clients);
+      })
+      
   },
   getClientsByID: async (id, setState) => {
     const clientRef = doc(db, 'orders', id);
@@ -67,6 +69,6 @@ export const UserServices = {
   },
   deleteOrders: async (id) => {
     const orderRef = doc(db, 'orders', id);
-    await deleteDoc(orderRef)
+    await deleteDoc(orderRef);
   },
 };

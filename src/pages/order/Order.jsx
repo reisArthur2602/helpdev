@@ -34,7 +34,7 @@ export const Order = () => {
     await UserServices.deleteOrders(id);
     await UserServices.getOrders(setGetOrder);
   };
-
+ 
   return (
     <>
       <Modal isOpen={open} infos={info} onClick={() => setOpen(!open)} />
@@ -99,4 +99,3 @@ export const Order = () => {
     </>
   );
 };
- 
