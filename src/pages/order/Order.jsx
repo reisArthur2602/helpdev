@@ -22,7 +22,7 @@ export const Order = () => {
 
   useEffect(() => {
     return async () => {
-      await UserServices.getOrders(setGetOrder);
+      await UserServices.getOrders(setGetOrder).catch((err)=>console.error("falha ao buscar Chamados"))
     };
   }, []);
 

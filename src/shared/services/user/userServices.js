@@ -5,7 +5,10 @@ import {
   doc,
   getDoc,
   getDocs,
+  onSnapshot,
+  query,
   updateDoc,
+  where,
 } from 'firebase/firestore';
 
 import { db } from '../firebase/conn';
@@ -17,22 +20,25 @@ export const UserServices = {
       .then(() => console.log('cliente cadastrado com sucesso'))
       .catch((err) => console.error(err));
   },
-  getClients: async (setState) => {
+  getClientsByUser: async (setState, uid) => {
     const clientRef = collection(db, 'clients');
-    await getDocs(clientRef)
-      .then((data) => {
-        let clients = [];
-        
-        data.forEach((doc) =>
-          clients.push({
-            id: doc.id,
-            name: doc.data().name,
-          })
-        );
-        setState(clients);
-      })
+
+    const q = query(clientRef, where('uid', '==', uid));
+
+    onSnapshot(q, (data) => {
+      let clients = [];
+
+      data.forEach((doc) => {
+        clients.push({
+          id: doc.id,
+          name: doc.data().name,
+        });
+      });
       
+      setState(clients);
+    });
   },
+
   getClientsByID: async (id, setState) => {
     const clientRef = doc(db, 'orders', id);
     await getDoc(clientRef).then((data) => setState(data.data()));
@@ -72,3 +78,28 @@ export const UserServices = {
     await deleteDoc(orderRef);
   },
 };
+
+// if (data) {
+//   const taskRef = collection(db, "tarefas");
+//   const q = query(
+//     taskRef,
+//     orderBy("created", "desc"),
+//     where("userUid", "==", data?.uid)
+//   );
+
+//   const unsub = onSnapshot(q, (snapshot) => {
+//     let list = [];
+
+//     snapshot.forEach((doc) => {
+//       list.push({
+//         id: doc.id,
+//         tarefa: doc.data().tarefa,
+//         userUid: doc.data().userUid,
+//         completa: doc.data().completa,
+//         created: doc.data().created,
+//       });
+//     });
+
+//     setTasks(list);
+//   });
+// }

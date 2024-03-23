@@ -16,7 +16,6 @@ export const AppRoutes = () => {
         <Route path="/clients" element={<Private><Clients/></Private>} />
         <Route path="/profile" element={<Private><Profile/></Private>} />
      
-
       <Route path="*" element={<SignIn />} />
     </Routes>
   );

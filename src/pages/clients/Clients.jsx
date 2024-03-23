@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { LayoutDashBoard } from '../../shared/layout';
 import { ButtonSubmit, Header, TextField } from '../../shared/components';
 import { useForm } from 'react-hook-form';
 import { UserServices, clientSchema } from '../../shared/services';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as S from './styles';
+import { AuthContext } from '../../shared/context/Auth';
 
 export const Clients = () => {
+  const { user } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
@@ -15,7 +18,8 @@ export const Clients = () => {
     resolver: yupResolver(clientSchema),
   });
 
-  const HandleCreate = async (data) => {
+  const HandleCreate = async (res) => {
+    const data = { ...res, uid: user.uid };
     await UserServices.createClient(data);
   };
 

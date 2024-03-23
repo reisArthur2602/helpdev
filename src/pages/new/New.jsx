@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserServices, orderSchema } from '../../shared/services';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -9,15 +9,17 @@ import { SelectField } from './select-field/SelectField';
 import { TextareaField } from './textarea-field/TextareaField';
 import * as S from './styles';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../shared/context/Auth';
 
 export const New = () => {
   const [getClients, setGetClients] = useState([]);
   const [idCustomer, setIdCustomer] = useState({});
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
 
   useEffect(() => {
     return async () => {
-      await UserServices.getClients(setGetClients);
+      await UserServices.getClientsByUser(setGetClients, user.uid);
       if (id) {
         await UserServices.getClientsByID(id, setIdCustomer);
       }
