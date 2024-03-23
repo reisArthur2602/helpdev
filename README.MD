@@ -26,7 +26,7 @@ Com o Help Desk, é possível centralizar todas as formas de comunicação com o
 ### 🚀Demo
 
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
-<a href="https://helpdev-one.vercel.app/">Link do Projeto</a>
+<a href="https://helpdev-sand.vercel.app/">Link do Projeto</a>
 
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 <a href="https://www.figma.com/file/lfhjZKKQejVWzXTxOUBycM/helpDev?type=design&node-id=0%3A1&mode=design&t=bnOWbiYVOKSnAJlW-1">Link do Figma</a>
