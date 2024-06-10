@@ -19,14 +19,3 @@ Com o Help Desk, é possível centralizar todas as formas de comunicação com o
 ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
 
-### 😊Autor
-
-**Arthur** - _Codificação e criação do designer da aplicação_
-
-### 🚀Demo
-
-![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
-<a href="https://helpdev-sand.vercel.app/">Link do Projeto</a>
-
-![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
-<a href="https://www.figma.com/file/lfhjZKKQejVWzXTxOUBycM/helpDev?type=design&node-id=0%3A1&mode=design&t=bnOWbiYVOKSnAJlW-1">Link do Figma</a>
